@@ -88,6 +88,20 @@ docker build -t public-drown-scanner .
 docker run -it public-drown-scanner localhost 443
 ```
 
+### FreeBSD
+
+short version: use python libdnet from ports and install everything else inside a virtualenv.
+
+long version:
+
+```bash
+sudo pkg install py27-virtualenv libdnet py27-libdnet
+git clone https://github.com/nimia/public_drown_scanner.git
+cd public_drown_scanner
+virtualenv --system-site-packages .
+bin/pip install enum pycrypto scapy pyasn1 scapy-ssl_tls pcapy
+```
+
 Usage examples:
 ---------------
 ```
