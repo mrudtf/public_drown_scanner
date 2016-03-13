@@ -81,6 +81,16 @@ https://github.com/nimia/public_drown_scanner/issues/30
 
 You may also need dnet as a dependency.
 
+### Windows
+The latest version of Scapy supports Windows out-of-the-box, with Python 2.6.
+See here for installation instructions:
+
+http://www.secdev.org/projects/scapy/doc/installation.html#windows
+
+And here if you absolutely need to use Python 2.7:
+
+https://stackoverflow.com/questions/5447461/running-scapy-on-windows-with-python-2-7
+
 ### Even more dependencies
 One user has graciously documented setting up the dependencies
 on a stripped-down installation of CentOS:
