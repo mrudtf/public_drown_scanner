@@ -94,9 +94,9 @@ docker run -it public-drown-scanner localhost 443
 
 ### FreeBSD
 
-short version: use python libdnet from ports and install everything else inside a virtualenv.
+Short version: use python libdnet from ports and install everything else inside a virtualenv.
 
-long version:
+Long version:
 
 ```bash
 sudo pkg install py27-virtualenv libdnet py27-libdnet

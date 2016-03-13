@@ -31,6 +31,8 @@ The DROWN team thanks the following contributors to this utility.
 
 * **[Ruben Barkow](https://github.com/rubo77)**
 
+* **[Tom Lazar](https://github.com/tomster)**
+
 Apologies in advance if I forgot anyone.
 Please open an issue (or submit a PR) and I will gladly include you.
 
