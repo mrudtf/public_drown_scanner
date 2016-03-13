@@ -51,11 +51,11 @@ Pull requests clarifying the dependency list (and also general PRs) are welcome.
 
 `sudo apt-get install tcpdump python-pyasn1 scapy python-crypto python-pip`
 
-On Debian jessie also install
+On Debian Jessie also install
 
 `sudo apt-get install python-enum`
 
-and also run
+and for all Debian versions, also run
 
 `sudo pip install scapy-ssl_tls`
 
