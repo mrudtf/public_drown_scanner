@@ -279,7 +279,7 @@ def sslv2_connect(ip, port, protocol, cipher_suite, result_additional_data):
 
     rlist, wlist, xlist = select.select([s], [], [s], SOCKET_TIMEOUT)
     if s in xlist or not s in rlist:
-        print '%s: Case 3a; Server did not response properly to client hello' % ip
+        print '%s: Case 3a; Server did not respond properly to client hello' % ip
         s.close()
         return "3a: %s" % NO_TLS
 
