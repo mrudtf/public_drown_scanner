@@ -181,8 +181,37 @@ class DES(CipherSuite):
         if decryption[17:].startswith(CHALLENGE):
             return True
         return False
+        
+class DES3(CipherSuite):
+    SECRET_KEY = 'b' * 24
+    CLEAR_KEY  = 'a' * 15
 
-cipher_suites = [RC2Export, RC4Export, RC4, DES]
+    @classmethod
+    def get_string_description(cls):
+        return "DES_192_EDE3_CBC_WITH_MD5"
+
+    @classmethod
+    def get_client_master_key(cls, public_key):
+        client_master_key = SSLv2ClientMasterKey(cipher_suite=cls.get_constant(),
+                                                 encrypted_key=cls.get_encrypted_pms(public_key, cls.SECRET_KEY),
+                                                 key_argument=KEY_ARGUMENT,
+                                                 clear_key=cls.CLEAR_KEY)
+        return client_master_key
+
+    @classmethod
+    def verify_key(cls, connection_id, server_finished):
+        md5_0 = MD5.new((cls.CLEAR_KEY + cls.SECRET_KEY)[:24] + '0' + CHALLENGE + connection_id).digest()
+        md5_1 = MD5.new((cls.CLEAR_KEY + cls.SECRET_KEY)[:24] + '1' + CHALLENGE + connection_id).digest()
+        des3 = Crypto.Cipher.DES3.new(md5_0 + md5_1[:8], mode=Crypto.Cipher.DES3.MODE_CBC, IV=KEY_ARGUMENT)
+        try:
+            decryption = des3.decrypt(server_finished[3:])
+        except ValueError, e:
+            return False
+        if decryption[17:].startswith(CHALLENGE):
+            return True
+        return False
+
+cipher_suites = [RC2Export, RC4Export, RC4, DES, DES3]
 
 def parse_certificate(derData):
     cert = decode(derData, asn1Spec=Certificate())[0]
@@ -394,7 +423,7 @@ if __name__ == '__main__':
             cve_string = ""
             if not ret_additional_data['cipher_suite_advertised']:
                 cve_string = " to CVE-2015-3197"
-            if string_description == "RC4_128_WITH_MD5":
+            if string_description == "RC4_128_WITH_MD5" or string_description == "DES_192_EDE3_CBC_WITH_MD5":
                 if cve_string == "":
                     cve_string = " to CVE-2016-0703"
                 else:
