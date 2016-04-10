@@ -183,8 +183,8 @@ class DES(CipherSuite):
         return False
         
 class DES3(CipherSuite):
-    SECRET_KEY = 'b' * 24
-    CLEAR_KEY  = 'a' * 15
+    SECRET_KEY = 'b' * 8 + 'c' * 8 + 'd' * 8
+    CLEAR_KEY  = 'a' * 23
 
     @classmethod
     def get_string_description(cls):
